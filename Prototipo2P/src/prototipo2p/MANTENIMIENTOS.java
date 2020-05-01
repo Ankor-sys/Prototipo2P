@@ -90,6 +90,11 @@ public class MANTENIMIENTOS extends javax.swing.JInternalFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -131,6 +136,11 @@ public class MANTENIMIENTOS extends javax.swing.JInternalFrame {
         Conceptos ventana = new Conceptos();
         jDesktopPane1.add(ventana);
     }//GEN-LAST:event_mantenimientoConceptosActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jMenu2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

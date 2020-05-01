@@ -16,6 +16,7 @@ public class MDI extends javax.swing.JFrame {
      */
     public MDI() {
         initComponents();
+        this.setTitle("Sebastian André Moreira Berges 9959-18-7960");
     }
 
     /**
@@ -33,8 +34,8 @@ public class MDI extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuMantenimientos = new javax.swing.JMenuItem();
-        menuCatalogos = new javax.swing.JMenuItem();
         menuProcesos = new javax.swing.JMenuItem();
+        menuCatalogos = new javax.swing.JMenuItem();
         menuInformes = new javax.swing.JMenuItem();
         menuHerramientas = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenuItem();
@@ -66,11 +67,16 @@ public class MDI extends javax.swing.JFrame {
         });
         jMenu1.add(menuMantenimientos);
 
+        menuProcesos.setText("Procesos");
+        menuProcesos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProcesosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuProcesos);
+
         menuCatalogos.setText("Catalogos");
         jMenu1.add(menuCatalogos);
-
-        menuProcesos.setText("Procesos");
-        jMenu1.add(menuProcesos);
 
         menuInformes.setText("Informes");
         jMenu1.add(menuInformes);
@@ -89,6 +95,11 @@ public class MDI extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenu2.add(jSeparator1);
 
         jMenuBar1.add(jMenu2);
@@ -118,6 +129,17 @@ public class MDI extends javax.swing.JFrame {
         MANTENIMIENTOS ventana = new MANTENIMIENTOS();
         jDesktopPane1.add(ventana);
     }//GEN-LAST:event_menuMantenimientosActionPerformed
+
+    private void menuProcesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProcesosActionPerformed
+        // TODO add your handling code here:
+        PROCESOS ventana = new PROCESOS();
+        jDesktopPane1.add(ventana);
+    }//GEN-LAST:event_menuProcesosActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
