@@ -207,7 +207,7 @@ public class Puestos extends javax.swing.JInternalFrame {
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
         // TODO add your handling code here:
 
-        if ( txtid.getText().isEmpty() || txtNombre.getText().isEmpty()){
+        if ( txtid.getText().isEmpty() || txtNombre.getText().isEmpty() || txtStatus.getText().isEmpty()){
 
             JOptionPane.showMessageDialog(null, " NO SE PUEDE DEJAR CAMPO VACIO");
 
@@ -218,7 +218,7 @@ public class Puestos extends javax.swing.JInternalFrame {
               
                 try{
             Connection cn = DriverManager.getConnection(server, user, password);
-            PreparedStatement pst2 = cn.prepareStatement("insert into PUESTO values(?,?,?)");
+            PreparedStatement pst2 = cn.prepareStatement("insert into puesto values(?,?,?)");
             
             
             
@@ -250,7 +250,7 @@ public class Puestos extends javax.swing.JInternalFrame {
             String IdPuesto = txtBuscar.getText().trim();
             
             Connection cn = DriverManager.getConnection(server, user, password);
-            PreparedStatement pst = cn.prepareStatement("update PUESTO set IdPuesto = ?,NombrePuesto = ?,Departamentos = ? where IdPuesto = " + IdPuesto);
+            PreparedStatement pst = cn.prepareStatement("update puesto set codigo_puesto = ?,nombre_puesto = ?,estatus_puesto = ? where codigo_puesto = " + IdPuesto);
             
             pst.setString(1, txtid.getText().trim());
              pst.setString(2, txtNombre.getText().trim());
@@ -273,15 +273,15 @@ public class Puestos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try{
             Connection cn = DriverManager.getConnection(server, user, password);
-            PreparedStatement pst = cn.prepareStatement("select * from PUESTO where IdPuesto = ?");
+            PreparedStatement pst = cn.prepareStatement("select * from puesto where codigo_puesto = ?");
             pst.setString(1, txtBuscar.getText().trim());
             
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                txtid.setText(rs.getString("IdPuesto"));
-                txtNombre.setText(rs.getString("NombrePuesto"));
-                txtStatus.setText(rs.getString("Departamentos"));
+                txtid.setText(rs.getString("codigo_puesto"));
+                txtNombre.setText(rs.getString("nombre_puesto"));
+                txtStatus.setText(rs.getString("estatus_puesto"));
             } else {
                 JOptionPane.showMessageDialog(null, "Alumno no registrado.");
             }
@@ -296,7 +296,7 @@ public class Puestos extends javax.swing.JInternalFrame {
         
         try {
              Connection cn = DriverManager.getConnection(server, user, password);
-            PreparedStatement pst = cn.prepareStatement("delete from PUESTO where IdPuesto = ?");
+            PreparedStatement pst = cn.prepareStatement("delete from puesto where codigo_puesto = ?");
             
             pst.setString(1, txtBuscar.getText().trim());
             pst.executeUpdate();
