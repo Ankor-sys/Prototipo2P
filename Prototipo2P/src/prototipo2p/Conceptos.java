@@ -42,7 +42,7 @@ public class Conceptos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnSalir = new javax.swing.JButton();
-        txtValor = new javax.swing.JTextField();
+        txtStatus = new javax.swing.JTextField();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -53,7 +53,7 @@ public class Conceptos extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtAplicacion = new javax.swing.JTextField();
+        txtEfecto = new javax.swing.JTextField();
         btn_Modificar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -131,8 +131,8 @@ public class Conceptos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtValor, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtAplicacion, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtStatus, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtEfecto, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -181,9 +181,9 @@ public class Conceptos extends javax.swing.JInternalFrame {
                                 .addGap(16, 16, 16)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(32, 32, 32)
@@ -213,16 +213,16 @@ public class Conceptos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try{
             Connection cn = DriverManager.getConnection(server, user, password);
-            PreparedStatement pst = cn.prepareStatement("select * from CONCEPTOS where Id_Concepto = ?");
+            PreparedStatement pst = cn.prepareStatement("select * from concepto where codigo_concepto = ?");
             pst.setString(1, txtBuscar.getText().trim());
 
             ResultSet rs = pst.executeQuery();
 
             if(rs.next()){
-                txtId.setText(rs.getString("Id_Concepto"));
-                txtNombre.setText(rs.getString("NombreConcepto"));
-                txtAplicacion.setText(rs.getString("AfectaConcepto"));
-                txtValor.setText(rs.getString("valorConcepto"));
+                txtId.setText(rs.getString("codigo_comcepto"));
+                txtNombre.setText(rs.getString("nombre_concepto"));
+                txtEfecto.setText(rs.getString("efecto_concepto"));
+                txtStatus.setText(rs.getString("estatus_concepto"));
                 
                 
             } else {
@@ -241,14 +241,13 @@ public class Conceptos extends javax.swing.JInternalFrame {
             String ID = txtBuscar.getText().trim();
 
             Connection cn = DriverManager.getConnection(server, user, password);
-            PreparedStatement pst = cn.prepareStatement("update CONCEPTOS set Id_Concepto = ?,NombreConcepto = ?, AfectaConcepto = ?, valorConcepto = ?, TipoConcepto = ?, ValorMax = ?, ValorMin = ? where Id_Concepto = " + ID);
+            PreparedStatement pst = cn.prepareStatement("update concepto set codigo_cocepto = ?,nombre_concepto = ?, efecto_concepto = ?, estatus_concepto = ? where codigo_concepto = " + ID);
 
             pst.setString(1, txtId.getText().trim());
             pst.setString(2, txtNombre.getText().trim());
-            pst.setString(3, txtAplicacion.getText().trim());
-            pst.setString(4, txtValor.getText().trim());            
-            pst.setString(6, txtValor.getText().trim());
-            pst.setString(7, txtValor.getText().trim());
+            pst.setString(3, txtEfecto.getText().trim());
+            pst.setString(4, txtStatus.getText().trim());            
+          
             pst.executeUpdate();
 
         } catch (Exception e) {
@@ -258,7 +257,7 @@ public class Conceptos extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
 
-        if ( txtId.getText().isEmpty() || txtNombre.getText().isEmpty()|| txtAplicacion.getText().isEmpty() || txtValor.getText().isEmpty())
+        if ( txtId.getText().isEmpty() || txtNombre.getText().isEmpty()|| txtEfecto.getText().isEmpty() || txtStatus.getText().isEmpty())
         {
 
             JOptionPane.showMessageDialog(null, " NO SE PUEDE DEJAR CAMPO VACIO");
@@ -267,20 +266,20 @@ public class Conceptos extends javax.swing.JInternalFrame {
         else {
             try{
                 Connection cn = DriverManager.getConnection(server, user, password);
-                PreparedStatement pst = cn.prepareStatement("insert into CONCEPTOS values (?,?,?,?,?,?,?)");
+                PreparedStatement pst = cn.prepareStatement("insert into concepto values (?,?,?,?)");
 
                 pst.setString(1, txtId.getText().trim());
                 pst.setString(2, txtNombre.getText().trim());
-                pst.setString(3, txtAplicacion.getText().trim());
-                pst.setString(4, txtValor.getText().trim());
+                pst.setString(3, txtEfecto.getText().trim());
+                pst.setString(4, txtStatus.getText().trim());
 
 
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro Exitoso.");
                 txtId.setText("");
                 txtNombre.setText("");
-                txtAplicacion.setText("");
-                txtValor.setText("");
+                txtEfecto.setText("");
+                txtStatus.setText("");
 
             }catch(Exception e){
 
@@ -295,15 +294,15 @@ public class Conceptos extends javax.swing.JInternalFrame {
 
         try {
            Connection cn = DriverManager.getConnection(server, user, password);
-            PreparedStatement pst = cn.prepareStatement("delete from CONCEPTOS where Id_Concepto = ?");
+            PreparedStatement pst = cn.prepareStatement("delete from concepto where codigo_concepto = ?");
 
             pst.setString(1, txtBuscar.getText().trim());
             pst.executeUpdate();
 
             txtId.setText("");
                 txtNombre.setText("");
-                txtAplicacion.setText("");
-                txtValor.setText("");
+                txtEfecto.setText("");
+                txtStatus.setText("");
 
                 
                 JOptionPane.showMessageDialog(null, "Registro Eliminado.");
@@ -326,10 +325,10 @@ public class Conceptos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField txtAplicacion;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtEfecto;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtValor;
+    private javax.swing.JTextField txtStatus;
     // End of variables declaration//GEN-END:variables
 }

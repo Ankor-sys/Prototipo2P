@@ -53,7 +53,7 @@ public class MANTENIMIENTOS extends javax.swing.JInternalFrame {
             .addGap(0, 413, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Abrir");
+        jMenu1.setText("Mantenimientos");
 
         mantenimientoEmpleados.setText("Empleados");
         mantenimientoEmpleados.addActionListener(new java.awt.event.ActionListener() {
